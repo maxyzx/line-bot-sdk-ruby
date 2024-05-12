@@ -225,6 +225,14 @@ module Line
         post(endpoint, endpoint_path, payload, credentials.merge(headers))
       end
 
+      def push_loading(user_id, loading_seconds, headers: {}, payload: {})
+        channel_token_required
+
+        endpoint_path = '/bot/chat/loading/start'
+        payload = payload.merge({ chatId: user_id, loadingSeconds: loading_seconds }).to_json
+        post(endpoint, endpoint_path, payload, credentials.merge(headers))
+      end
+
       # Reply messages to a user using replyToken.
       #
       # @example Send a balloon to a user.
